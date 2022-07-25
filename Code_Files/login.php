@@ -136,7 +136,6 @@ session_start();
     $_SESSION["password"] = $_POST['password'];
     $usename = $_SESSION["usename"];
     $password = $_SESSION["password"];
-    
     // adding password encryption
     
     $mysqli = new mysqli('localhost','root','','robotronics');

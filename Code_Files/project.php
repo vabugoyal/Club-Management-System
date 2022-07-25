@@ -147,7 +147,7 @@ $mysqli->close();
 
   <section class = "head_doc">
       <br>
-        <h1 class = "head_heading">Hello <?php echo $_SESSION['username']; ?></h1>
+        <h1 class = "head_heading">Hello <?php echo $_SESSION['usename']; ?></h1>
     </section>
 
 
