@@ -18,6 +18,7 @@
 </style>
 
 <?php
+	// mail data
 	$CN = $_POST['CN'];
 	$id = $_POST['id'];
 	$Name = $_POST['Name'] ;
@@ -51,6 +52,8 @@ If any query ,edit filled records
 	";
 	$headers = "From: abc.net";
 
+	
+	// email with details is sent to the person who filled the application form 
 	if (mail($to_email, $subject, $body, $headers)) {
 		echo "<br><h2 style='color:green'>email with more details sent to $to_email</h2><br>";
 	} else {
@@ -69,16 +72,19 @@ If any query ,edit filled records
 	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 
-$mysqli = new mysqli('localhost','root','','Robotronics');
-$sql = "SELECT sponsor_mail FROM `sponsor_robo` WHERE id='$id' and sponsor_role ='title-sponsor' ";
-$result = $mysqli->query($sql);
-$mysqli->close(); 
+	$mysqli = new mysqli('localhost','root','','Robotronics');
+	$sql = "SELECT sponsor_mail FROM `sponsor_robo` WHERE id='$id' and sponsor_role ='title-sponsor' ";
+	$result = $mysqli->query($sql);
+	$mysqli->close(); 
 
     while($rows=$result->fetch_assoc())
      {      
         $to_email = $rows['sponsor_mail'] ;
         settype($to_email, "string"); 
-    }     
+    }   
+	
+
+	
     
     
 	$subject = "Budget application request ";
@@ -101,6 +107,8 @@ thank you :)
 	
 	";
 	
+
+	// email sent to the sponsor of the project
 	if (mail($to_email, $subject, $body)) {
 		echo "<br><h2 style='color:green'>budget application email sent to title-sponsor of the project </h2>";
 	} else {

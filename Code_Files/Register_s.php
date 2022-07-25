@@ -63,24 +63,26 @@ $sql1 = "INSERT INTO `new_pro_robo`(`id`, `project_name`,
 	echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
 	}
 
-$sql2 = "INSERT INTO `project_robo`(`id`, `project_name`, `head`, `sponsor`, `due_date`, `status`)
- VALUES ('$id','$Project_name','$head','$sponsor','$due_date','Not Requested')";
+  // achieved this using triggers
 
-    if (mysqli_query($conn, $sql2)) {
-		echo "<br> <h1 style='color:green'>New project registered successfuly in  projects table</h1>" ;
+// $sql2 = "INSERT INTO `project_robo`(`id`, `project_name`, `head`, `sponsor`, `due_date`, `status`)
+//  VALUES ('$id','$Project_name','$head','$sponsor','$due_date','Not Requested')";
+
+//     if (mysqli_query($conn, $sql2)) {
+// 		echo "<br> <h1 style='color:green'>New project registered successfuly in  projects table</h1>" ;
         
-	} else {
-	echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
-	}
+// 	} else {
+// 	echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
+// 	}
 
-$sql3 = "INSERT INTO `sponsor_robo`(`id`, `sponsor_name`, `sponsor_mail`, `sponsor_role`)
-VALUES ('$id','$sponsor','$sponsor_email','title-sponsor')";
+// $sql3 = "INSERT INTO `sponsor_robo`(`id`, `sponsor_name`, `sponsor_mail`, `sponsor_role`)
+// VALUES ('$id','$sponsor','$sponsor_email','title-sponsor')";
 
-	if (mysqli_query($conn, $sql3)) {
-		echo "<br> <h1 style='color:green'>Sponsor details registered successfuly in new sponsor table</h1>" ;
-	} else {
-	echo "Error: " . $sql3 . "<br>" . mysqli_error($conn);
-	}
+// 	if (mysqli_query($conn, $sql3)) {
+// 		echo "<br> <h1 style='color:green'>Sponsor details registered successfuly in new sponsor table</h1>" ;
+// 	} else {
+// 	echo "Error: " . $sql3 . "<br>" . mysqli_error($conn);
+// 	}
 
 
 $to_email = $Email ;

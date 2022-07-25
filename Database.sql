@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2022 at 11:11 AM
+-- Generation Time: Jul 25, 2022 at 03:46 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -44,7 +44,10 @@ CREATE TABLE `app_req_robo` (
 --
 
 INSERT INTO `app_req_robo` (`Club_Name`, `Project_Id`, `Applicant_Name`, `Applicant_Role`, `Email`, `Phone_no`, `Request_date`, `Budget`, `Approval_date`) VALUES
-('Robotronics', 'pr10', 'pratik', 'Co-ordinator', 'b20106@students.iitmandi.ac.in', '8767341519', '2021-11-11', '20000', '2021-11-11');
+('Robotronics', 'pr10', 'pratik', 'Co-ordinator', 'b20106@students.iitmandi.ac.in', '8767341519', '2021-11-11', '20000', '2021-11-11'),
+('Robotronics', 'pr2', 'Vaibhav', 'Core-member', 'vaibhavgoyalop@gmail.com', '9812276214', '2022-07-25', '25000', '2022-07-25'),
+('Robotronics', 'pr51', 'Vaibhav', 'Co-ordinator', 'vaibhavgoyalop@gmail.com', '981227621312', '2022-07-25', '12312', '2022-07-25'),
+('Robotronics', 'pr1', 'Sanjeet', 'Core-member', 'b20140@students.iitmandi.ac.in', '32423', '2022-07-25', '15000', '2022-07-25');
 
 -- --------------------------------------------------------
 
@@ -96,7 +99,26 @@ CREATE TABLE `new_pro_robo` (
 
 INSERT INTO `new_pro_robo` (`id`, `project_name`, `registrar_name`, `registrar_email`, `registrar_role`, `head`, `sponsor`, `sponsor_email`, `due_date`, `registration_date`) VALUES
 ('pr20', 'Cellphone-Operated Land Rover', 'pratik kamble', 'b20106@students.iitmandi,ac.in', 'Co-ordinator', 'tony stark', 'iit mandi', 'b20133@students.iitmandi.ac.in', '2021-11-26', '2021-11-11'),
-('pr10', 'Automatic Mess Attendance System', 'Vaibhav', 'vaibhavgoyalop@gmail.com', 'Co-ordinator', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-30', '2022-07-25');
+('pr10', 'Automatic Mess Attendance System', 'Vaibhav', 'vaibhavgoyalop@gmail.com', 'Co-ordinator', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-30', '2022-07-25'),
+('pr51', 'Automatic Mess Attendence', 'Vaibhav', 'vaibhavgoyalop@gmail.com', 'Teacher-associate', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-30', '2022-07-25'),
+('pr101', 'Automatic Attendence', 'Shubham', 'b20140@students.iitmandi.ac.in', 'Co-ordinator', 'Vaibhav', 'IIT Mandi', 'clubmanagementsystemiitm@gmail.com', '2022-07-22', '2022-07-25'),
+('pr44', 'Automatic Tennis Ball Thrower', 'Amrendra', 'b20080@students.iitmandi.ac.in', 'Co-ordinator', 'Amrendra', 'IIT Mandi', 'vaibhavgoyalop@gmail.com', '2022-07-29', '2022-07-25'),
+('pr45', 'Automatic Mess Attendance System', 'qweqwe', 'vaibhavgoyalop@gmail.com', 'Co-ordinator', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-29', '2022-07-25'),
+('pr46', 'Automatic Mess Attendance System', 'qweqwe', 'vaibhavgoyalop@gmail.com', 'Co-ordinator', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-29', '2022-07-25');
+
+--
+-- Triggers `new_pro_robo`
+--
+DELIMITER $$
+CREATE TRIGGER `addNewProject` AFTER INSERT ON `new_pro_robo` FOR EACH ROW BEGIN
+	INSERT INTO sponsor_robo(id, sponsor_name, sponsor_mail, sponsor_role)
+	VALUES (new.id, new.sponsor, new.sponsor_email, 'title-sponsor');
+	
+    INSERT INTO project_robo(id, project_name, head, sponsor, due_date, status)
+ 	VALUES (new.id, new.Project_name, new.head, new.sponsor, new.due_date,'Not Requested');
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -118,13 +140,18 @@ CREATE TABLE `project_robo` (
 --
 
 INSERT INTO `project_robo` (`id`, `project_name`, `head`, `sponsor`, `due_date`, `status`) VALUES
-('pr1', 'Artificial Intelligence-Based Chatbot for Appliance Control	\n', 'Ella Cross	', 'Auris Health	', '2021-11-30', 'Not Requested'),
+('pr1', 'Artificial Intelligence-Based Chatbot for Appliance Control	\n', 'Ella Cross	', 'Auris Health	', '2021-11-30', 'Approved'),
 ('pr10', 'Soccer Robot	', 'Maggie Ramos	', 'Markforged	', '2021-11-30', 'Approved'),
-('pr2', 'Virtual Telepresence Robot Using Raspberry Pi	', 'Francis Simon	', 'Peloton Technology	', '2021-11-30', 'Not Requested'),
-('pr20', 'Cellphone-Operated Land Rover', 'tony stark', 'iit mandi', '2021-11-26', 'Not Requested'),
-('pr3', 'Make Your Own Remote Controlled Robot	', 'Marco Washington	', 'Abbott Fund	', '2021-11-30', 'Not Requested'),
-('pr4', 'Arduino based Smartphone Controlled Robot Car	', 'Henrietta Gonzales	', 'Lockheed Martin	', '2021-11-30', 'Not Requested'),
+('pr101', 'Automatic Attendence', 'Vaibhav', 'IIT Mandi', '2022-07-22', 'Requested'),
+('pr2', 'Virtual Telepresence Robot Using Raspberry Pi	', 'Francis Simon	', 'Peloton Technology	', '2021-11-30', 'Approved'),
+('pr20', 'Cellphone-Operated Land Rover', 'tony stark', 'iit mandi', '2021-11-26', 'Rejected'),
+('pr3', 'Make Your Own Remote Controlled Robot	', 'Marco Washington	', 'Abbott Fund	', '2021-11-30', 'Rejected'),
+('pr4', 'Arduino based Smartphone Controlled Robot Car	', 'Henrietta Gonzales	', 'Lockheed Martin	', '2021-11-30', 'Rejected'),
+('pr44', 'Automatic Tennis Ball Thrower', 'Amrendra', 'IIT Mandi', '2022-07-29', 'Not Requested'),
+('pr45', 'Automatic Mess Attendance System', 'Vaibhav', 'IIT MANDI', '2022-07-29', 'Not Requested'),
+('pr46', 'Automatic Mess Attendance System', 'Vaibhav', 'IIT MANDI', '2022-07-29', 'Not Requested'),
 ('pr5', 'Colour Sensing Robot with MATLAB	', 'Emilio Gilbert	', 'DSS SolidWorks	', '2021-11-30', 'Not Requested'),
+('pr51', 'Automatic Mess Attendence', 'Vaibhav', 'IIT MANDI', '2022-07-30', 'Approved'),
 ('pr6', 'RF Controlled Robot	', 'Lynne Munoz	', 'The Linley Group	', '2021-11-30', 'Not Requested'),
 ('pr7', 'Android Phone Controlled Robot	', 'Emma Ferguson	', 'Intuitive Surgical	', '2021-11-30', 'Not Requested'),
 ('pr8', 'Fire Extinguishing Robot	', 'Kate Jackson	', 'Westcoast Products	', '2021-11-30', 'Not Requested'),
@@ -148,6 +175,15 @@ CREATE TABLE `rej_req_robo` (
   `Rejection_date` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `rej_req_robo`
+--
+
+INSERT INTO `rej_req_robo` (`Club_Name`, `Project_Id`, `Applicant_Name`, `Applicant_Role`, `Email`, `Phone_no`, `Request_date`, `Budget`, `Rejection_date`) VALUES
+('Robotronics', 'pr20', 'Amrendra', 'Core-member', 'b20080@stuednts.iitmandi.ac.in', '9812276214', '2022-07-25', '15000', '2022/07/25'),
+('Robotronics', 'pr3', 'Vaibhav', 'Core-member', 'vaibhavgoyalop@gmail.com', '32423', '2022-07-25', '10000', '2022/07/25'),
+('Robotronics', 'pr4', 'CMS', 'Core-member', 'sdfsdf', '234234', '2022-07-25', '2342134', '2022/07/25');
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +200,13 @@ CREATE TABLE `requests_robo` (
   `Request_date` date NOT NULL,
   `Budget` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `requests_robo`
+--
+
+INSERT INTO `requests_robo` (`Club_Name`, `Project_Id`, `Applicant_Name`, `Applicant_Role`, `Email`, `Phone_no`, `Request_date`, `Budget`) VALUES
+('Robotronics', 'pr101', 'Amrendra', 'Core-member', 'b20140@students.iitmandi.ac.in', '9812276214', '2022-07-25', '10000');
 
 --
 -- Triggers `requests_robo`
@@ -241,7 +284,12 @@ INSERT INTO `sponsor_robo` (`id`, `sponsor_name`, `sponsor_mail`, `sponsor_role`
 ('pr10', 'Kathleen Dunn', 'Kathlee_ Dunn@gmail.com', 'sub-sponsor'),
 ('pr10', 'Karen Weaver', 'Karen_Weaver@gmail.com', 'sub-sponsor'),
 ('pr20', 'iit mandi', 'b20133@students.iitmandi.ac.in', 'title-sponsor'),
-('pr10', 'IIT MANDI', 'none', 'title-sponsor');
+('pr10', 'IIT MANDI', 'none', 'title-sponsor'),
+('pr51', 'IIT MANDI', 'none', 'title-sponsor'),
+('pr101', 'IIT Mandi', 'clubmanagementsystemiitm@gmail.com', 'title-sponsor'),
+('pr44', 'IIT Mandi', 'vaibhavgoyalop@gmail.com', 'title-sponsor'),
+('pr45', 'IIT MANDI', 'none', 'title-sponsor'),
+('pr46', 'IIT MANDI', 'none', 'title-sponsor');
 
 -- --------------------------------------------------------
 
