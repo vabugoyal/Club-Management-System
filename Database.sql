@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 02:39 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Host: localhost
+-- Generation Time: Jul 25, 2022 at 11:11 AM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,8 +54,8 @@ INSERT INTO `app_req_robo` (`Club_Name`, `Project_Id`, `Applicant_Name`, `Applic
 
 CREATE TABLE `login` (
   `name` varchar(50) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,12 +64,12 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`name`, `email`, `password`, `role`) VALUES
-('amrendra', 'b20080@students.iitmandi.ac.in', 'pas', 'coordinator'),
-('pratik kamble', 'b20106@students.iitmandi.ac.in', 'pass', 'coordinator'),
-('sanjeet', 'b20131@students.iitmandi.ac.in', 'pas', 'authority'),
-('shailesh rathod', 'b20133@students.iitmandi.ac.in', 'pass', 'coordinator'),
-('vaibhav goyal', 'b20140@students.iitmandi.ac.in', 'pass', 'coordinator'),
-('shubham', 'b20168@students.iitmandi.ac.in', 'pas', 'authority');
+('amrendra', 'b20080@students.iitmandi.ac.in', '$2y$10$DuXotrdI3WtbkPA/0IU/7u06rt.F.G9RsLTP5mkwdFxng69Ggkja6', 'coordinator'),
+('pratik kamble', 'b20106@students.iitmandi.ac.in', '$2y$10$D27BtKNHdNTxBVy/wp034.PvNeuCITm97iyla8hZDQFtacRIUQw3.', 'coordinator'),
+('sanjeet', 'b20131@students.iitmandi.ac.in', '$2y$10$DuXotrdI3WtbkPA/0IU/7u06rt.F.G9RsLTP5mkwdFxng69Ggkja6', 'authority'),
+('shailesh rathod', 'b20133@students.iitmandi.ac.in', '$2y$10$D27BtKNHdNTxBVy/wp034.PvNeuCITm97iyla8hZDQFtacRIUQw3.', 'coordinator'),
+('vaibhav goyal', 'b20140@students.iitmandi.ac.in', '$2y$10$D27BtKNHdNTxBVy/wp034.PvNeuCITm97iyla8hZDQFtacRIUQw3.', 'coordinator'),
+('shubham', 'b20168@students.iitmandi.ac.in', '$2y$10$DuXotrdI3WtbkPA/0IU/7u06rt.F.G9RsLTP5mkwdFxng69Ggkja6', 'authority');
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,8 @@ CREATE TABLE `new_pro_robo` (
 --
 
 INSERT INTO `new_pro_robo` (`id`, `project_name`, `registrar_name`, `registrar_email`, `registrar_role`, `head`, `sponsor`, `sponsor_email`, `due_date`, `registration_date`) VALUES
-('pr20', 'Cellphone-Operated Land Rover', 'pratik kamble', 'b20106@students.iitmandi,ac.in', 'Co-ordinator', 'tony stark', 'iit mandi', 'b20133@students.iitmandi.ac.in', '2021-11-26', '2021-11-11');
+('pr20', 'Cellphone-Operated Land Rover', 'pratik kamble', 'b20106@students.iitmandi,ac.in', 'Co-ordinator', 'tony stark', 'iit mandi', 'b20133@students.iitmandi.ac.in', '2021-11-26', '2021-11-11'),
+('pr10', 'Automatic Mess Attendance System', 'Vaibhav', 'vaibhavgoyalop@gmail.com', 'Co-ordinator', 'Vaibhav', 'IIT MANDI', 'none', '2022-07-30', '2022-07-25');
 
 -- --------------------------------------------------------
 
@@ -239,7 +240,8 @@ INSERT INTO `sponsor_robo` (`id`, `sponsor_name`, `sponsor_mail`, `sponsor_role`
 ('pr10', 'Rene Romero', 'Rene_Romero@gmail.com', 'sub-sponsor'),
 ('pr10', 'Kathleen Dunn', 'Kathlee_ Dunn@gmail.com', 'sub-sponsor'),
 ('pr10', 'Karen Weaver', 'Karen_Weaver@gmail.com', 'sub-sponsor'),
-('pr20', 'iit mandi', 'b20133@students.iitmandi.ac.in', 'title-sponsor');
+('pr20', 'iit mandi', 'b20133@students.iitmandi.ac.in', 'title-sponsor'),
+('pr10', 'IIT MANDI', 'none', 'title-sponsor');
 
 -- --------------------------------------------------------
 

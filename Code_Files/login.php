@@ -114,7 +114,7 @@ session_start();
         </div>
         <hr class = "horizontal_line">
         <form class="userform" action="" method="post">
-          <label class="login_label" for="usename"><b>email</b></label>
+          <label class="login_label" for="usename"><b>username</b></label>
           <input class="input_text" type="text" name="usename">
           <label class="login_label" for="password"><b>password</b></label>
           <input class="input_text" type="password" name="password">
@@ -136,31 +136,35 @@ session_start();
     $_SESSION["password"] = $_POST['password'];
     $usename = $_SESSION["usename"];
     $password = $_SESSION["password"];
-
-    $mysqli = new mysqli('localhost','root','','robotronics');
-    $query = "select * from login where name = '$usename' and password = '$password'";
-    $result = $mysqli->query($query);
     
-
     // adding password encryption
     
+    $mysqli = new mysqli('localhost','root','','robotronics');
+    $query = "select * from login where name = '$usename'";
+    $result = $mysqli->query($query);
+    $login = false;
+    $role = "";
 
-    
     if ($result->num_rows > 0) 
-    { 
-        $role = "";
-        foreach($result as $row) {
-            $role = $row['role'];
-        }
+    {     
+      foreach($result as $row) {
+          $role = $row['role'];
+          if (password_verify($password, $row['password'])) {
+            $login = true;
+          }
+      }  
+    } 
+
+    if ($login) {
         if ($role == "authority"){
-            header("Location: requests.php");
-            exit;
+          header("Location: requests.php");
+          exit;
         }
         else{
-            header("Location: project.php");
-            exit;
+          header("Location: project.php");
+          exit;
         }
-    }else {
+    } else {
         ?>
         <script>
             alert( "Access Denied. You may have entered the wrong input details.")
@@ -173,3 +177,6 @@ session_start();
 
   }
 ?>
+
+
+
