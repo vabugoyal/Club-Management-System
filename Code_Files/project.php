@@ -78,7 +78,7 @@ $mysqli->close();
         color: white;
       }
       #NR{
-          color : red ;
+          color : grey ;
       }
       #AP{
           color : green ;
@@ -147,7 +147,7 @@ $mysqli->close();
 
   <section class = "head_doc">
       <br>
-        <h1 class = "head_heading">Hello <?php echo $_SESSION['email']; ?></h1>
+        <h1 class = "head_heading">Hello <?php echo $_SESSION['username']; ?></h1>
     </section>
 
 
@@ -175,33 +175,32 @@ $mysqli->close();
                 <td><?php echo $rows['head'];?></td>
                 <td><?php echo $rows['sponsor'];?></td>
                 <td><?php echo $rows['due_date'];?></td>
+                
+                
                 <?php
                     if($rows['status']=="Approved"){
                 ?>
 				        <td id ="AP"><?php echo $rows['status'];?></td>
-
-
                 <?php
                     }
-                ?>
-                <?php
                     if($rows['status']=="Not Requested" or $rows['status']=="Rejected"){
                 ?>
 				        <td id ="NR"><?php echo $rows['status'];?></td>
-                        <td>
-                        <form method="post" action="application.php" target=”_blank”>
-                            <input type="text" name="CN" id="CN" hidden value="Robotronics">
-                            <input type="text" name="id" id="id" hidden value=<?php echo $rows['id']?>>
-                            <button
-                            class="button button1"
-                            type ="submit"
-                            name = "bt1"
-                            >
-                            Click here to apply
-                            </button>
-                        </form>
+                
+                <td>
+                    <form method="post" action="application.php" target=”_blank”>
+                        <input type="text" name="CN" id="CN" hidden value="Robotronics">
+                        <input type="text" name="id" id="id" hidden value=<?php echo $rows['id']?>>
+                        <button
+                        class="button button1"
+                        type ="submit"
+                        name = "bt1"
+                        >
+                        Click here to apply
+                        </button>
+                    </form>
 
-                        </td>
+                    </td>
 
                 <?php
                     }

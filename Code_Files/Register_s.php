@@ -82,6 +82,7 @@ VALUES ('$id','$sponsor','$sponsor_email','title-sponsor')";
 	echo "Error: " . $sql3 . "<br>" . mysqli_error($conn);
 	}
 
+
 $to_email = $Email ;
 $subject = "Confirmation Email from college ";
 $body = " You have successfully registered a new program 
@@ -106,12 +107,14 @@ thank you :)
 		echo "Email sending failed... :( , due to some technical issue";
 	}
 ?>
+
+
 <html>
     <form action="project.php">
         <br><br><button
-            class="button button1"
+          class="button button1"
           >
-            Click here to go back
+          Click here to go back
           </button>
     </form>
 </html>

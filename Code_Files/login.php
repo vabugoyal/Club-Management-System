@@ -86,23 +86,12 @@ session_start();
   background-color:gray;
 }
 
-.submit_button1
+.submit_button
 {
   display: block;
   margin-top: 8%;
   width: 80%;
   background-color: #0066A2;
-  color: white;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.4rem;
-}
-.submit_button2
-{
-  display: block;
-  margin-top: 8%;
-  width: 80%;
-  background-color: green;
   color: white;
   margin-left: auto;
   margin-right: auto;
@@ -125,22 +114,15 @@ session_start();
         </div>
         <hr class = "horizontal_line">
         <form class="userform" action="" method="post">
-          <label class="login_label" for="email"><b>email</b></label>
-          <input class="input_text" type="text" name="email">
+          <label class="login_label" for="usename"><b>email</b></label>
+          <input class="input_text" type="text" name="usename">
           <label class="login_label" for="password"><b>password</b></label>
           <input class="input_text" type="password" name="password">
          
-          <input class="submit_button1" type="submit" name="submit" value="submit">
+          <input class="submit_button" type="submit" name="submit" value="submit">
           <hr class = "horizontal_line">
         </form>
-        <form class="userform" action="login_n.php" method="post">
-
-          <input class="submit_button2" type="submit" name="submit1" value="New user">
-
-        </form>
-
       </div>
-
 </body>
 </html>
 
@@ -150,15 +132,19 @@ session_start();
 
 <?php 
     if(isset($_POST['submit'])){
-    $_SESSION["email"] = $_POST['email'];
+    $_SESSION["usename"] = $_POST['usename'];
     $_SESSION["password"] = $_POST['password'];
-    $email = $_SESSION["email"];
+    $usename = $_SESSION["usename"];
     $password = $_SESSION["password"];
 
     $mysqli = new mysqli('localhost','root','','robotronics');
-    $query = "select * from login where email = '$email' and password = '$password'";
+    $query = "select * from login where name = '$usename' and password = '$password'";
     $result = $mysqli->query($query);
     
+
+    // adding password encryption
+    
+
     
     if ($result->num_rows > 0) 
     { 

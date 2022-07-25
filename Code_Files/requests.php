@@ -3,11 +3,9 @@ session_start();
 $mysqli = new mysqli('localhost','root','','Robotronics');
 $sql = "SELECT * FROM requests_robo";
 $result = $mysqli->query($sql);
-
 $approved = $mysqli->query("SELECT * FROM app_req_robo");
 $rejected = $mysqli->query("SELECT * FROM rej_req_robo");
 $mysqli->close(); 
-
 ?>
 
 <!DOCTYPE html>
@@ -137,7 +135,7 @@ $mysqli->close();
 
 <section class = "head_doc">
       <br><br>
-        <h1 class = "head_heading">Hello <?php echo $_SESSION['email']; ?></h1>
+        <h1 class = "head_heading">Hello <?php echo $_SESSION['usename']; ?></h1>
     </section>
 
     <!-- pending section -->
